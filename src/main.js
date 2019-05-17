@@ -6,7 +6,7 @@ App.mpType = 'app'
 
 var fundebug = require('fundebug-wxjs')
 fundebug.init({
-  apikey: 'c50fa285025f060a6c1f481faacb12bcf17bff1f2cf6479063497c3b4f3e1372'
+  apikey: 'apikey' // 获取apikey需要免费注册Fundebug(https://www.fundebug.com)帐号并且创建项目。
 })
 
 // 测试1

@@ -1,37 +1,39 @@
 # fundebug-mpvue-demo
 
-> 演示mpvue如何接入Fundebug
+> 演示mpvue如何接入[Fundebug](https://www.fundebug.com/)
 
-## Build Setup
+### 1. 安装[fundebug-wxjs](https://www.npmjs.com/package/fundebug-wxjs)模块
 
-``` bash
-# 初始化项目
-vue init mpvue/mpvue-quickstart myproject
-cd myproject
-
-# 安装依赖
-yarn
-
-# 开发时构建
-npm dev
-
-# 打包构建
-npm build
-
-# 指定平台的开发时构建(微信、百度、头条、支付宝)
-npm dev:wx
-npm dev:swan
-npm dev:tt
-npm dev:my
-
-# 指定平台的打包构建
-npm build:wx
-npm build:swan
-npm build:tt
-npm build:my
-
-# 生成 bundle 分析报告
-npm run build --report
+```bash
+npm install --save fundebug-wxjs
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 2. 在**main.js**中接入[fundebug-wxjs](https://www.npmjs.com/package/fundebug-wxjs)模块
+
+```js
+var fundebug = require('fundebug-wxjs')
+fundebug.init({
+  apikey: 'apikey'
+})
+```
+
+-   获取**apikey 需要**[免费注册](https://www.fundebug.com/team/create)帐号并且[创建项目](https://www.fundebug.com/project/create)。
+
+### 3. 在**App.vue**中配置onError
+
+```js
+export default {
+  onError (err) {
+    var fundebug = require('fundebug-wxjs')
+    fundebug.notifyError(err)
+  }
+}
+```
+
+### 4. 将[https://fundebug.com](https://fundebug.com)添加到**request 合法域名**
+
+1. 登陆[微信公众平台](https://mp.weixin.qq.com/)
+2. 选择右侧『设置』，选择『开发设置』，翻到『服务器域名』，点击『修改』。将[https://fundebug.com](https://fundebug.com)添加到**request 合法域名**。注意，服务器域名**一个月内只能修改 5 次**。
+3. 域名添加成功后，在**微信开发者工具**打开对应小程序项目，选择右侧『项目』，选择『配置信息』，点击『刷新』，即可看到配置好的[https://fundebug.com](https://fundebug.com)域名。
+
+
