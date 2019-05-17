@@ -26,6 +26,10 @@ export default {
   },
   log () {
     console.log(`log at:${Date.now()}`)
+  },
+  onError (err) {
+    var fundebug = require('fundebug-wxjs')
+    fundebug.notifyError(err)
   }
 }
 </script>

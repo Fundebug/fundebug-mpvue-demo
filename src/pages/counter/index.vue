@@ -20,6 +20,9 @@ export default {
   },
   methods: {
     increment () {
+      // 测试3
+      let a
+      console.log(a.b)
       store.commit('increment')
     },
     decrement () {
